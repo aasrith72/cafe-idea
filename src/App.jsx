@@ -76,8 +76,8 @@ export default function App() {
     },
   ];
 
-  const filteredMenuItems = activeCategory === 'all' 
-    ? menuItems 
+  const filteredMenuItems = activeCategory === 'all'
+    ? menuItems
     : menuItems.filter(item => item.cat === activeCategory);
 
   const reviews = [
@@ -85,19 +85,19 @@ export default function App() {
       text: "Honestly the best cold brew I've had in Hyderabad. The vibe is incredible — came for an hour, stayed for three. This is my new second home.",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
       name: "Priya Sharma",
-      role: "UX Designer, Banjara Hills"
+      role: "UX Designer"
     },
     {
       text: "The Brioche French Toast is absolutely divine. Paired with their single origin pour-over — it's the kind of breakfast that makes you slow down and actually enjoy life.",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
       name: "Rohan Mehta",
-      role: "Startup Founder, Gachibowli"
+      role: "Startup Founder"
     },
     {
       text: "I've been to cafes across the country and Noir & Roast has something special. The team genuinely cares about every single cup. You feel it from the first sip.",
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
       name: "Ananya Rao",
-      role: "Food Blogger, Jubilee Hills"
+      role: "Food Blogger"
     }
   ];
 
@@ -132,13 +132,12 @@ export default function App() {
 
   return (
     <div className="font-['DM_Sans',sans-serif] bg-[#FDF6EC] text-[#1a0f0a] overflow-x-hidden">
-      
+
       {/* NAV */}
       <nav
         id="navbar"
-        className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-[5%] lg:px-[8%] py-[1rem] sm:py-[1.2rem] flex items-center justify-between transition-all duration-500 ${
-          scrolled ? 'bg-[#2C1810]/95 shadow-[0_2px_20px_rgba(0,0,0,0.3)]' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-[5%] lg:px-[8%] py-[1rem] sm:py-[1.2rem] flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-[#2C1810]/95 shadow-[0_2px_20px_rgba(0,0,0,0.3)]' : 'bg-transparent'
+          }`}
       >
         <a href="#" className="font-['Cormorant_Garamond',serif] text-[1.4rem] sm:text-[1.6rem] font-semibold text-white tracking-[0.05em] no-underline">
           Noir <span className="text-[#C9944A]">&</span> Roast
@@ -180,7 +179,7 @@ export default function App() {
               </li>
             ))}
             <li>
-               <button
+              <button
                 className="w-full mt-2 bg-[#C9944A] text-white border-none py-3 px-6 font-['DM_Sans',sans-serif] text-[0.85rem] font-medium tracking-[0.08em] uppercase cursor-pointer hover:bg-[#E8B96A] transition-colors duration-300"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -198,7 +197,7 @@ export default function App() {
       <section id="hero" className="h-screen relative flex items-center justify-center text-center overflow-hidden group">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1600&q=80')] bg-center bg-cover bg-no-repeat scale-105 transition-transform duration-[8s] ease-in-out group-hover:scale-100"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#140a05]/55 to-[#140a05]/70"></div>
-        
+
         <div className="relative z-10 w-full px-4 sm:px-8 md:px-[5%] lg:px-[10%] py-0 pt-[4rem]">
           <p className="text-[0.7rem] sm:text-[0.8rem] lg:text-[0.85rem] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#C9944A] mb-[1rem] sm:mb-[1.5rem]">Est. 2018 · Hyderabad, India</p>
           <h1 className="font-['Cormorant_Garamond',serif] text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] font-light text-white leading-[1.1] mb-[1.2rem] sm:mb-[1.5rem]">
@@ -260,16 +259,15 @@ export default function App() {
           </h2>
           <div className="w-[40px] sm:w-[60px] h-[1px] bg-[#C9944A] my-[1.2rem] sm:my-[1.5rem] mx-auto"></div>
         </div>
-        
+
         <div className="flex gap-[0.5rem] justify-center flex-wrap mb-[2.5rem] sm:mb-[3rem]">
           {['all', 'coffee', 'food', 'dessert'].map((cat) => (
             <button
               key={cat}
-              className={`py-[0.45rem] sm:py-[0.5rem] px-[1.2rem] sm:px-[1.5rem] border font-['DM_Sans',sans-serif] text-[0.75rem] sm:text-[0.8rem] tracking-[0.08em] uppercase cursor-pointer transition-all duration-300 ${
-                activeCategory === cat
+              className={`py-[0.45rem] sm:py-[0.5rem] px-[1.2rem] sm:px-[1.5rem] border font-['DM_Sans',sans-serif] text-[0.75rem] sm:text-[0.8rem] tracking-[0.08em] uppercase cursor-pointer transition-all duration-300 ${activeCategory === cat
                   ? 'bg-[#2C1810] text-white border-[#2C1810]'
                   : 'bg-transparent text-[#7a5c4a] border-[#4A2C1A]/25 hover:bg-[#2C1810] hover:text-white hover:border-[#2C1810]'
-              }`}
+                }`}
               onClick={() => setActiveCategory(cat)}
             >
               {cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -308,7 +306,7 @@ export default function App() {
           </h2>
           <div className="w-[40px] sm:w-[60px] h-[1px] bg-[#C9944A] my-[1.2rem] sm:my-[1.5rem] mx-auto"></div>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1.5rem] lg:gap-[2rem] max-w-[1100px] mx-auto">
           {reviews.map((review, i) => (
             <ReviewCard key={i} text={review.text} avatar={review.avatar} name={review.name} role={review.role} />
@@ -334,7 +332,7 @@ export default function App() {
               ))}
             </div>
           </div>
-          
+
           <div className="bg-white p-[2rem] sm:p-[2.5rem] rounded-md shadow-sm border border-[#4A2C1A]/10">
             <p className="text-[0.7rem] lg:text-[0.75rem] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#C9944A] mb-[0.8rem] sm:mb-[1rem]">Reservations</p>
             <h2 className="font-['Cormorant_Garamond',serif] text-[1.8rem] sm:text-[2rem] font-light text-[#2C1810] leading-[1.2] mb-[1.2rem] sm:mb-[1.5rem]">
