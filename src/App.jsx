@@ -118,7 +118,7 @@ export default function App() {
   const contactInfos = [
     { icon: "📍", title: "Address", details: "12, Cafe Lane, Jubilee Hills, Hyderabad — 500033" },
     { icon: "🕐", title: "Hours", details: "Mon–Fri: 7:30 AM – 10 PM · Sat–Sun: 8 AM – 11 PM" },
-    { icon: "📞", title: "Phone", details: "+91 98765 43210" },
+    { icon: "📞", title: "Phone", details: "+91 987654****" },
     { icon: "✉️", title: "Email", details: "hello@noirandroast.in" }
   ];
 
@@ -265,8 +265,8 @@ export default function App() {
             <button
               key={cat}
               className={`py-[0.45rem] sm:py-[0.5rem] px-[1.2rem] sm:px-[1.5rem] border font-['DM_Sans',sans-serif] text-[0.75rem] sm:text-[0.8rem] tracking-[0.08em] uppercase cursor-pointer transition-all duration-300 ${activeCategory === cat
-                  ? 'bg-[#2C1810] text-white border-[#2C1810]'
-                  : 'bg-transparent text-[#7a5c4a] border-[#4A2C1A]/25 hover:bg-[#2C1810] hover:text-white hover:border-[#2C1810]'
+                ? 'bg-[#2C1810] text-white border-[#2C1810]'
+                : 'bg-transparent text-[#7a5c4a] border-[#4A2C1A]/25 hover:bg-[#2C1810] hover:text-white hover:border-[#2C1810]'
                 }`}
               onClick={() => setActiveCategory(cat)}
             >
