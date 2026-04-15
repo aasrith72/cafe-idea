@@ -1,6 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HfInference } from "@huggingface/inference";
 
+// Local fallback: answers common cafe questions without needing an API
+function getLocalFallback(userMsg) {
+  const msg = userMsg.toLowerCase();
+  if (/(hour|open|close|time|when)/.test(msg))
+    return 'We are open Mon–Fri 7:30 AM – 10 PM and Sat–Sun 8 AM – 11 PM. Hope to see you soon! ☕';
+  if (/(address|location|where|find|directions?)/.test(msg))
+    return 'You can find us at 12, Cafe Lane, Jubilee Hills, Hyderabad — 500033. We are easy to spot!';
+  if (/(menu|food|eat|drink|coffee|latte|espresso|toast|tiramisu|brew|avocado|brioche|dalgona|cold brew|specialt)/.test(msg))
+    return 'Our specialties include Cold Brew Float, Brioche French Toast, Signature Espresso, Classic Tiramisu, Dalgona Latte, and Smashed Avocado Toast. Any of those tempt you? 😊';
+  if (/(founded|history|old|started|since|year)/.test(msg))
+    return 'Noir & Roast was founded in 2018 with a passion for great coffee and cozy vibes!';
+  if (/(price|cost|cheap|expensive|afford)/.test(msg))
+    return 'Our menu is priced to offer great value! Swing by or give us a call for the full price list.';
+  if (/(wifi|work|laptop|study)/.test(msg))
+    return 'Yes, we have free Wi-Fi — perfect for working or studying over a great cup of coffee!';
+  if (/(park|parking)/.test(msg))
+    return 'There is ample street parking near us in Jubilee Hills. Welcome!';
+  if (/(reservation|book|reserve|table)/.test(msg))
+    return 'We welcome walk-ins! For large groups, feel free to call ahead and we will do our best to accommodate you.';
+  if (/(hi|hello|hey|howdy|greet)/.test(msg))
+    return 'Hello! 👋 Welcome to Noir & Roast. Ask me anything about our menu, hours, or location!';
+  if (/(thank|thanks|great|perfect|awesome)/.test(msg))
+    return 'You\'re very welcome! Looking forward to brewing something special for you. ☕';
+  return null; // no local match — let the API handle it
+}
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -63,17 +89,34 @@ You answer questions about the cafe, its menu, hours, and location.
       });
       mappedMessages.push({ role: "user", content: userMessage });
 
+      // Check local fallback first — avoids an API call for simple cafe questions
+      const localAnswer = getLocalFallback(userMessage);
+      if (localAnswer) {
+        setMessages(prev => [...prev, { role: 'bot', content: localAnswer }]);
+        setIsLoading(false);
+        return;
+      }
+
       const response = await hf.chatCompletion({
-        model: "mistralai/Mistral-7B-Instruct-v0.3",
+        model: "Qwen/Qwen2.5-72B-Instruct",
         messages: mappedMessages,
-        max_tokens: 250,
+        max_tokens: 200,
       });
 
       const responseText = response.choices[0].message.content;
       setMessages(prev => [...prev, { role: 'bot', content: responseText }]);
     } catch (error) {
       console.error("Hugging Face API Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', content: 'Oops! I am having trouble connecting to Hugging Face or you have exceeded your rate limit. Check the console for details.' }]);
+      // Last-resort: try the local fallback before showing an error
+      const localAnswer = getLocalFallback(userMessage);
+      if (localAnswer) {
+        setMessages(prev => [...prev, { role: 'bot', content: localAnswer }]);
+      } else {
+        setMessages(prev => [...prev, { 
+          role: 'bot', 
+          content: 'I\'m having a little trouble with my AI right now, but I can still help! Ask me about our menu, hours, or location. 😊' 
+        }]);
+      }
     } finally {
       setIsLoading(false);
     }
