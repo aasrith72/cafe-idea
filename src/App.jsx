@@ -112,7 +112,7 @@ export default function App() {
     { src: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80", alt: "Coffee art" },
     { src: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=500&q=80", alt: "Cozy corner" },
     { src: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&q=80", alt: "Friends at cafe" },
-    { src: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=500&q=80", alt: "Pastry display" }
+    { src: "https://tinyurl.com/t4pkny3a", alt: "croissant display" }
   ];
 
   const contactInfos = [
