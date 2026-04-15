@@ -64,7 +64,7 @@ You answer questions about the cafe, its menu, hours, and location.
       mappedMessages.push({ role: "user", content: userMessage });
 
       const response = await hf.chatCompletion({
-        model: "meta-llama/Meta-Llama-3-8B-Instruct",
+        model: "mistralai/Mistral-7B-Instruct-v0.3",
         messages: mappedMessages,
         max_tokens: 250,
       });
